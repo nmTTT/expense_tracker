@@ -1,23 +1,14 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const cors = require("cors");
-const { logger } = require("./middlewares/logger");
-dotenv.config();
+const { Router } = require("express");
+const {
+  getAllUser,
+  createUser,
+  deleteUser,
+  updateUser,
+} = require("../controllers/user-controller");
 
-const userRoutes = require("./routes/user-route");
-const categoryRoutes = require("./routes/category-route");
+const router = Router();
 
-const PORT = process.env.PORT;
+router.route("/").get(getAllUser).post(createUser);
+router.route("/:id").put(updateUser).delete(deleteUser);
 
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-app.use(logger());
-
-app.use("/users", userRoutes);
-app.use("/categories", categoryRoutes);
-
-app.listen(PORT, () => {
-  console.log(`Сервер localhost:${PORT} дээр аслаа.`);
-});
+module.exports = router;
