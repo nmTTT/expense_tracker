@@ -1,6 +1,4 @@
-const next = require("next.js/lib/next");
 const sql = require("../config/db");
-const { trace } = require("../routes/user-route");
 
 const getAllUser = async (req, res) => {
   try {
@@ -24,36 +22,25 @@ const createUser = async (req, res) => {
   }
 };
 const updateUser = async (req, res) => {
-  return new Promise(function (resolve, reject) {
-    const { email, name, password, profile_img } = req.body;
+  try {
+    const values = req.body;
     const { id } = req.params;
-    sql.query(
-      "UPDATE users SET name = $1, email = $2, password = $3, profile_img = $4 WHERE id = $5 RETURNING *",
-      [name, email, password, profile_img, id],
-      (error, results) => {
-        if (error) {
-          reject(error);
-        }
-        if (results && results.rows) {
-          resolve(`Merchant updated: ${JSON.stringify(results.rows[0])}`);
-        } else {
-          reject(new Error("No results found"));
-        }
-      }
-    );
-  });
-  // const data = await sql(
-  //   `
-  //   UPDATE users
-  //   SET email = "$1", name = "$2", password = "$3", profile_img= "$4"
-  //   WHERE id=${id}`,
-  //   email,
-  //   name,
-  //   password,
-  //   profile_img
-  // );
-  // console.log("DATA", data);
-  // res.status(200).json({ message: "new user created successful", user: data });
+    const result = Object.keys(values)
+      .map((key) => `${key}='${values[key]}'`)
+      .join();
+    console.log("first", result);
+    const data = await sql`
+    UPDATE users
+    SET ${result}
+    WHERE id=${id}`;
+    console.log("DATA", data);
+    res
+      .status(200)
+      .json({ message: "new user created successful", user: data });
+  } catch (error) {
+    console.log("ER", error);
+    res.status(401).json({ message: "Couldn't update user" });
+  }
 };
 const deleteUser = async (req, res) => {
   try {
