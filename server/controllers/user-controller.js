@@ -1,6 +1,4 @@
-const next = require("next.js/lib/next");
 const sql = require("../config/db");
-const { trace } = require("../routes/user-route");
 
 const getAllUser = async (req, res) => {
   try {
