@@ -8,6 +8,7 @@ const signIn = async (req, res) => {
     const [user] = await sql`
     SELECT * FROM users WHERE email=${email};
     `;
+
     if (!user) {
       res.status(404).json({ message: "User not found" });
     } else {

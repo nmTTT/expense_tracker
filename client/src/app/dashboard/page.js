@@ -5,7 +5,6 @@ export default function DashboardPage() {
   return (
     <main>
       <Dashboard />
-
       <div> hi</div>
     </main>
   );

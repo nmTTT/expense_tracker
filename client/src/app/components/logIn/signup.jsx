@@ -79,7 +79,7 @@ const SignUp = () => {
   return (
     <div className="flex justify-center items-center flex-col h-screen">
       <div className=" flex justify-center items-center  gap-4 flex-col">
-        <img className="mb-10" src="./images/logo.png" alt="img" />
+        <img className="mb-10" src="./images/Vector.png" alt="img" />
         <h1 className="text-2xl font-semibold mb-2 text-slate-900 ">
           Create Geld account
         </h1>
