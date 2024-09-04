@@ -3,11 +3,12 @@ const sql = require("../config/db");
 const getAllCategory = async (req, res) => {
   try {
     console.log("user", req.user);
-    const data = await sql`SELECT * FROM categories`;
+    const { data } = await sql`SELECT * FROM categories`;
     res
       .status(200)
-      .json({ message: "successfully read category", categories: data });
+      .json({ message: "successfully read category", categories: { data } });
   } catch (error) {
+    console.log("error", error);
     res.status(404).json({ message: "couldn't read category" });
   }
 };

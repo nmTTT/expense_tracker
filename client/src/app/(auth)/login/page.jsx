@@ -19,14 +19,14 @@ const Login = () => {
     const { email, password } = userData;
 
     try {
-      const response = await axios.post(`${apiUrl}/auth/signin`, {
+      const res = await axios.post(`${apiUrl}/auth/signin`, {
         email,
         password,
       });
 
-      if (response.status === 200) {
-        toast.success("User successfully signed in", { autoClose: 1000 });
-        const { token } = response.data;
+      if (res.status === 200) {
+        toast.success("User successfully signed in", { autoClose: 1500 });
+        const { token } = res.data;
         localStorage.setItem("token", token);
         router.push("/dashboard");
       }
