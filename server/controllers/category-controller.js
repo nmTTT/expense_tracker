@@ -17,7 +17,9 @@ const createCategory = async (res, req) => {
     const { name, description, category_img } = req.body;
     const { data } =
       await sql`INSERT INTO categories(name, description, category_img) VALUES(${name}, ${description},${category_img})`;
-    res.status(201).json({ message: "successfully created category" });
+    res
+      .status(201)
+      .json({ message: "successfully created category", categories: data });
   } catch (error) {
     res.status(404).json({ message: "couldn't create category" });
   }
@@ -28,7 +30,9 @@ const updateCategory = async (res, req) => {
     const { name, description, category_img } = req.body;
     const { data } =
       await sql`UPDATE categories SET ${name}, ${description}, ${category_img} WHERE id=${id}`;
-    res.status(200).json({ message: "successfully updated category" });
+    res
+      .status(200)
+      .json({ message: "successfully updated category", categories: data });
   } catch (error) {
     res.status(404).json({ message: "couldn't update category" });
   }

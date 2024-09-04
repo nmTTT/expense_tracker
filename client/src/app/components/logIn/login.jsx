@@ -39,6 +39,16 @@ const Login = ({ hidden, handleChange, handleLogin, form }) => {
           onChange={handleChange}
         />
       </label>
+      <label>
+        <input
+          type="password"
+          className="grow"
+          placeholder="Re-password"
+          name="re_password"
+          value={form.re_password}
+          onChange={handleChange}
+        />
+      </label>
       <button className="btn btn-primary btn-wide" onClick={handleLogin}>
         Log in
       </button>

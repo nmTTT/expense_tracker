@@ -24,7 +24,7 @@ const LoginPage = () => {
   const postCustomerData = async () => {
     const { email, password } = form;
     if (!email || !password) {
-      return console.log("password aldaa"); // Stop the function if any field is empty
+      return console.log("password error"); // Stop the function if any field is empty
     }
     const user = {
       email,

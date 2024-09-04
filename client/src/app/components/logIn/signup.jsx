@@ -12,8 +12,8 @@ const SignUp = () => {
     email: "",
     name: "",
     password: "",
+    re_password: "",
   });
-  // re_password: "",
 
   const handleChange = (e) => {
     const { name, value } = e.target;
