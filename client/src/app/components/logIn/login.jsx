@@ -39,7 +39,9 @@ const Login = ({ hidden, handleChange, handleLogin, form }) => {
           onChange={handleChange}
         />
       </label>
-      <label>
+      <label
+        className={`${hidden} input input-bordered flex items-center gap-2`}
+      >
         <input
           type="password"
           className="grow"
