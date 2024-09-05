@@ -2,7 +2,7 @@ const sql = require("../config/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const signIn = async (req, res) => {
+const logIn = async (req, res) => {
   try {
     const { email, password } = req.body;
     const [user] = await sql`
@@ -42,4 +42,4 @@ const signUp = async (req, res) => {
   }
 };
 
-module.exports = { signUp, signIn };
+module.exports = { signUp, logIn };

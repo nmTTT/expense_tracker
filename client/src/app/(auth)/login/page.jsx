@@ -19,7 +19,7 @@ const Login = () => {
     const { email, password } = userData;
 
     try {
-      const res = await axios.post(`${apiUrl}/auth/signin`, {
+      const res = await axios.post(`${apiUrl}/auth/logIn`, {
         email,
         password,
       });

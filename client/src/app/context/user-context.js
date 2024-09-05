@@ -14,18 +14,36 @@ export const UserProvider = ({ children }) => {
     profile_img: "",
   });
 
+  const [transAmount, setTransAmount] = useState([]);
+  const [expenseCat, setExpenseCat] = useState([]);
+
   const fetchUserData = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`${apiUrl}/users/profile`, {
+      const response = await axios.get(`${apiUrl}/users/dashboard`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
       if (response.status === 200) {
+        const {
+          totalTransType,
+          dayTrans,
+          weekCategoryTrans,
+          latestFiveRecords,
+        } = await response.json();
+        setTransAmount(dayTrans);
+        setExpenseCat(weekCategoryTrans);
         setUser(response.data);
-        console.log("USER", response.data);
+        console.log(
+          "USER",
+          totalTransType,
+          dayTrans,
+          weekCategoryTrans,
+          latestFiveRecords,
+          response.data
+        );
       }
     } catch (error) {
       console.error("Error fetching user data:", error);

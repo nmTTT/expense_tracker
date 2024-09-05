@@ -5,11 +5,11 @@ import { UserContext } from "../context/user-context";
 import axios from "axios";
 import { apiUrl } from "../../utils/util";
 import { toast } from "react-toastify";
-import ChartCard from "./ChartCard";
+import BarChartCard from "./BarChartCard";
 import CardTotalExpInc from "./CardTotalExpInc";
 
 const Dashboard = () => {
-  const { user } = useContext(UserContext);
+  const { user, transAmount, expenseCat } = useContext(UserContext);
   const [transactionData, setTransactionData] = useState([]);
 
   const fetchTransactions = async () => {
@@ -57,8 +57,7 @@ const Dashboard = () => {
         <CardTotalExpInc title="Total Expense" />
       </div>
       <div className="flex gap-6 justify-center">
-        <ChartCard />
-        <ChartCard />
+        <BarChartCard expenseCat={expenseCat} transAmount={transAmount} />
       </div>
       <div>
         <div></div>
