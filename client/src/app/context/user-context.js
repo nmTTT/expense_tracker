@@ -27,6 +27,7 @@ export const UserProvider = ({ children }) => {
       });
 
       if (response.status === 200) {
+        setUser(response.data);
         const {
           totalTransType,
           dayTrans,
@@ -35,15 +36,14 @@ export const UserProvider = ({ children }) => {
         } = await response.json();
         setTransAmount(dayTrans);
         setExpenseCat(weekCategoryTrans);
-        setUser(response.data);
         console.log(
           "USER",
           totalTransType,
           dayTrans,
           weekCategoryTrans,
-          latestFiveRecords,
-          response.data
+          latestFiveRecords
         );
+        console.log("user", response.data);
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
