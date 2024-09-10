@@ -56,19 +56,11 @@ const Dashboard = ({ fetchDashboardData }) => {
         <CardTotalExpInc title="Total Expense" />
       </div>
       <div className="container m-auto grid grid-cols-2 gap-6">
-        <div className="h-[18rem] flex flex-col">
-          <div className="p-2">
-            <p className="font-semibold">Income - Expense</p>
-          </div>
-          <div className="w-full border-gray-200 border"></div>
+        <div className="h-[18rem]">
           <BarChartCard title="Income - Expense" />
         </div>
-        <div className="h-[18rem] flex flex-col">
-          <div className="p-2">
-            <p className="font-semibold">Income - Expense</p>
-          </div>
-          <div className="w-full border-gray-200 border"></div>
-          <DoughnutChart />
+        <div className="h-[18rem]">
+          <DoughnutChart title="Income - Expense" />
         </div>
       </div>
 
