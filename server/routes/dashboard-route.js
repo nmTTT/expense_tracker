@@ -1,7 +1,8 @@
 const { Router } = require("express");
-const { DashboardData } = require("../controllers/dashboard-controller");
+const { dashboardData } = require("../controllers/dashboard-controller");
+const { auth } = require("../middlewares/auth");
 const router = Router();
 
-router.route("/dashboard").get(DashboardData);
+router.route("/info").get(dashboardData);
 
 module.exports = router;

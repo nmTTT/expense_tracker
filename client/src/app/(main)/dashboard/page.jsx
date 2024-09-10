@@ -1,81 +1,81 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../context/user-context";
 import axios from "axios";
-import { apiUrl } from "../../utils/util";
 import { toast } from "react-toastify";
-import BarChartCard from "./BarChartCard";
 import CardTotalExpInc from "./CardTotalExpInc";
+import { apiUrl } from "@/utils/util";
+import { UserContext } from "@/app/context/user-context";
+import BarChartCard from "./BarChartCard";
+import DoughnutChart from "./doughnutChart";
+import {
+  ArcElement,
+  BarElement,
+  CategoryScale,
+  Chart,
+  Legend,
+  LinearScale,
+} from "chart.js";
+import { DashboardContext } from "@/app/context/dashboard-context";
 
-const Dashboard = () => {
-  const { user, transAmount, expenseCat } = useContext(UserContext);
-  const [transactionData, setTransactionData] = useState([]);
+Chart.register(CategoryScale, LinearScale, BarElement, ArcElement, Legend);
 
-  const fetchTransactions = async () => {
-    try {
-      const res = await axios.get(`${apiUrl}/dashboard/${user.id}`);
-      setTransactionData(res.data);
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to fetch transactions");
-    }
-  };
+const Dashboard = ({ fetchDashboardData }) => {
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     if (user && user.id) {
-      fetchTransactions();
+      fetchDashboardData();
     }
   }, [user.id]);
 
   return (
-    <div className="bg-gray-100 p-10 flex flex-col gap-6 justify-center">
+    <div className="container m-auto flex flex-col gap-6 items-center w-[100vw]">
       <div className="flex gap-6 justify-center">
-        <div>
-          <div className="card image-full w-96 h-full shadow-xl">
-            <figure>
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                alt="Shoes"
-              />
-            </figure>
-            <div className="card-body flex flex-col justify-between">
-              <div>
-                <img src="Frame_24.png" alt="geld logo" />
+        <div className="card image-full w-96 h-full shadow-xl">
+          <figure>
+            <img
+              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+              alt="Shoes"
+            />
+          </figure>
+          <div className="card-body flex flex-col justify-between">
+            <div>
+              <img src="Frame_24.png" alt="geld logo" />
+            </div>
+            <div className="card-actions justify-between">
+              <div className="flex flex-col gap-2">
+                <p>Cash</p>
+                <div>10'000'000</div>
               </div>
-              <div className="card-actions justify-between">
-                <div className="flex flex-col gap-2">
-                  <p>Cash</p>
-                  <div>10'000'000</div>
-                </div>
-                <img src="./Logo.png" alt="wifi chip" />
-              </div>
+              <img src="./Logo.png" alt="wifi chip" />
             </div>
           </div>
         </div>
         <CardTotalExpInc title="Your Income" />
         <CardTotalExpInc title="Total Expense" />
       </div>
-      <div className="flex gap-6 justify-center">
-        <BarChartCard expenseCat={expenseCat} transAmount={transAmount} />
+      <div className="container m-auto grid grid-cols-2 gap-6">
+        <div className="h-[18rem] flex flex-col">
+          <div className="p-2">
+            <p className="font-semibold">Income - Expense</p>
+          </div>
+          <div className="w-full border-gray-200 border"></div>
+          <BarChartCard title="Income - Expense" />
+        </div>
+        <div className="h-[18rem] flex flex-col">
+          <div className="p-2">
+            <p className="font-semibold">Income - Expense</p>
+          </div>
+          <div className="w-full border-gray-200 border"></div>
+          <DoughnutChart />
+        </div>
       </div>
+
       <div>
         <div></div>
       </div>
-      {/* <div>
-				<h2>Records</h2>
-				{transactionData?.transactions?.map((transaction, index) => {
-					return (
-						<div key={index} className="flex">
-							<img src="/income.svg" alt="income" />
-							<div>
-								<p className="mb-1">{transaction?.name}</p>
-								<p className="text-[#6B7280]">{transaction?.createdat}</p>
-							</div>
-						</div>
-					);
-				})}
-			</div> */}
+      <div></div>
     </div>
   );
 };

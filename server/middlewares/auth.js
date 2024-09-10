@@ -9,6 +9,7 @@ const auth = (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const user = jwt.verify(token, "JWT_TOKEN_PASS@123");
   console.log("token", token);
+  console.log("user", user);
   req.user = user;
   next();
 };

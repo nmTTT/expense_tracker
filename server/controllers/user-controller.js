@@ -24,7 +24,6 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const { email, name, password, profile_img } = req.body;
   const { id } = req.params;
-  // const result = Object.keys(values).map((keys)=>keys);
 
   const data = await sql(
     `

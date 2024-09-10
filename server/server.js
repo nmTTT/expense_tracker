@@ -7,6 +7,7 @@ dotenv.config();
 const userRoutes = require("./routes/user-route");
 const authRoutes = require("./routes/auth-route");
 const categoryRoutes = require("./routes/category-route");
+const dashboardRoutes = require("./routes/dashboard-route");
 
 const PORT = process.env.PORT;
 
@@ -18,6 +19,7 @@ app.use(logger());
 
 app.use("/users", userRoutes);
 app.use("/auth", authRoutes);
+app.use("/dashboard", dashboardRoutes);
 app.use("/categories", categoryRoutes);
 
 app.listen(PORT, () => {

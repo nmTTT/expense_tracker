@@ -3,10 +3,10 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { UserContext } from "../context/user-context";
+// import { UserContext } from "../context/user-context";
 
 const Records = () => {
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
   const [transactionData, setTransactionData] = useState([]);
 
   const fetchTransactions = async () => {

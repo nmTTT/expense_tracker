@@ -13,7 +13,7 @@ const getAllCategory = async (req, res) => {
   }
 };
 
-const createCategory = async (res, req) => {
+const createCategory = async (req, res) => {
   try {
     const { name, description, category_img } = req.body;
     const { data } =
@@ -25,7 +25,7 @@ const createCategory = async (res, req) => {
     res.status(404).json({ message: "couldn't create category" });
   }
 };
-const updateCategory = async (res, req) => {
+const updateCategory = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, description, category_img } = req.body;
@@ -38,7 +38,7 @@ const updateCategory = async (res, req) => {
     res.status(404).json({ message: "couldn't update category" });
   }
 };
-const deleteCategory = async (res, req) => {
+const deleteCategory = async (req, res) => {
   try {
     const { id } = req.params;
     const { data } = await sql`DELETE FROM categories WHERE id=${id}`;

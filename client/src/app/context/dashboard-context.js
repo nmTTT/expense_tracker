@@ -4,37 +4,31 @@ import { createContext, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "@/utils/util";
 
-export const UserContext = createContext();
+export const DashboardContext = createContext();
 
-export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    userId: "",
-    name: "",
-    email: "",
-    profile_img: "",
-  });
+export const DashboardProvider = ({ children }) => {
+  const [dashboardData, setDashboardData] = useState([]);
 
-  const fetchUserData = async () => {
+  const fetchDashboardData = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`${apiUrl}/users`, {
+      const response = await axios.get(`${apiUrl}/dashboard/info`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
       if (response.status === 200) {
-        setUser(response.data);
+        setDashboardData(response.data);
         console.log("user", response.data);
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
   };
-
   return (
-    <UserContext.Provider value={{ user, fetchUserData }}>
+    <DashboardContext.Provider value={{ fetchDashboardData }}>
       {children}
-    </UserContext.Provider>
+    </DashboardContext.Provider>
   );
 };
