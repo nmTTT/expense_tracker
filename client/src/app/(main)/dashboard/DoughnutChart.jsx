@@ -1,4 +1,4 @@
-import { plugins } from "chart.js";
+"use client";
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
@@ -49,12 +49,14 @@ function DoughnutChart({ title }) {
         <p className="font-semibold">{title}</p>
       </div>
       <div className="border-gray-200 border"></div>
-      <div className="m-auto">
+      <div className="m-auto h-full w-fit flex justify-center bg-red-600">
         <div className="w-fit flex justify-center">
           <Doughnut
             data={doughnutData}
             options={doughnutOptions}
-            style={{ height: "100%", width: "100%" }}
+            height={600}
+            width={1000}
+            style={{ height: "400px", width: "400px" }}
           />
         </div>
       </div>
