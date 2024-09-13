@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
   const fetchUserData = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`${apiUrl}/users`, {
+      const response = await axios.get(`${apiUrl}/users/profile`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -33,7 +33,7 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ fetchUserData }}>
+    <UserContext.Provider value={{ user, fetchUserData }}>
       {children}
     </UserContext.Provider>
   );

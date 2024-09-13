@@ -1,10 +1,7 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { toast } from "react-toastify";
 import CardTotalExpInc from "./CardTotalExpInc";
-import { apiUrl } from "@/utils/util";
 import { UserContext } from "@/app/context/user-context";
 import BarChartCard from "./BarChartCard";
 import DoughnutChart from "./DoughnutChart";
@@ -24,10 +21,10 @@ const Dashboard = ({ fetchDashboardData }) => {
   const { user } = useContext(UserContext);
   const { dashboardData } = useContext(DashboardContext);
   useEffect(() => {
-    if (user && user.id) {
+    if (user && user?.id) {
       fetchDashboardData();
     }
-  }, [user.id]);
+  }, [user?.id]);
 
   return (
     <div className="container m-auto flex flex-col gap-6 items-center w-[100vw]">

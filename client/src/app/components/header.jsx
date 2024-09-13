@@ -1,8 +1,18 @@
 import { PlusIcon } from "@/icons";
 import Image from "next/image";
 import Link from "next/link";
+import { useContext } from "react";
+import { UserContext } from "../context/user-context";
 
-export const Header = ({ user, logOut, addRecord }) => {
+export const Header = () => {
+  const { user } = useContext(UserContext);
+  const logOut = () => {
+    localStorage.removeItem("token");
+    router.push("/login");
+  };
+
+  const addRecord = () => {};
+
   return (
     <header className="flex items-center max-w-[1200px] mx-auto justify-between py-4">
       <div className="flex gap-6 items-center">
