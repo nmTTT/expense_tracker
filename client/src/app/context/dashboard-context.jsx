@@ -1,13 +1,14 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "@/utils/util";
 
 export const DashboardContext = createContext();
 
 export const DashboardProvider = ({ children }) => {
-  const [dashboardData, setDashboardData] = useState([]);
+  const [totalInc, setTotalInc] = useState([]);
+  const [totalExp, setTotalExp] = useState([]);
 
   const fetchDashboardData = async () => {
     try {
@@ -19,15 +20,21 @@ export const DashboardProvider = ({ children }) => {
       });
 
       if (response.status === 200) {
-        setDashboardData(response.data);
-        console.log("user", response.data);
+        const { total_income, total_expense } = await response.json();
+        setTotalExp(total_expense.sum);
+        setTotalInc(total_income.sum);
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
   };
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
   return (
-    <DashboardContext.Provider value={{ fetchDashboardData, dashboardData }}>
+    <DashboardContext.Provider
+      value={{ fetchDashboardData, totalExp, totalInc }}
+    >
       {children}
     </DashboardContext.Provider>
   );

@@ -72,8 +72,8 @@ const dashboardData = async (req, res) => {
 
     res.status(200).json({
       message: "SUCCESS",
-      income: inc,
-      expense: exp,
+      total_income: inc,
+      total_expense: exp,
     });
     console.log("first", dashboardData.income);
   } catch (error) {

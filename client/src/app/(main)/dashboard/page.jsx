@@ -19,7 +19,7 @@ Chart.register(CategoryScale, LinearScale, BarElement, ArcElement, Legend);
 
 const Dashboard = ({ fetchDashboardData }) => {
   const { user } = useContext(UserContext);
-  const { dashboardData } = useContext(DashboardContext);
+  const { totalExp, totalInc } = useContext(DashboardContext);
   useEffect(() => {
     if (user && user?.id) {
       fetchDashboardData();
@@ -53,12 +53,12 @@ const Dashboard = ({ fetchDashboardData }) => {
         <CardTotalExpInc
           className="flex"
           title="Your Income"
-          trans_type={dashboardData.income}
+          total_trans={totalInc}
         />
         <CardTotalExpInc
           className="flex"
           title="Total Expense"
-          trans_type={dashboardData.expense}
+          total_trans={totalExp}
         />
       </div>
       <div className="container m-auto grid grid-cols-2 gap-6">
