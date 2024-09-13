@@ -7,7 +7,7 @@ import CardTotalExpInc from "./CardTotalExpInc";
 import { apiUrl } from "@/utils/util";
 import { UserContext } from "@/app/context/user-context";
 import BarChartCard from "./BarChartCard";
-import DoughnutChart from "./doughnutChart";
+import DoughnutChart from "./DoughnutChart";
 import {
   ArcElement,
   BarElement,
@@ -22,7 +22,7 @@ Chart.register(CategoryScale, LinearScale, BarElement, ArcElement, Legend);
 
 const Dashboard = ({ fetchDashboardData }) => {
   const { user } = useContext(UserContext);
-
+  const { dashboardData } = useContext(DashboardContext);
   useEffect(() => {
     if (user && user.id) {
       fetchDashboardData();
@@ -53,8 +53,16 @@ const Dashboard = ({ fetchDashboardData }) => {
             </div>
           </div>
         </div>
-        <CardTotalExpInc className="flex" title="Your Income" />
-        <CardTotalExpInc className="flex" title="Total Expense" />
+        <CardTotalExpInc
+          className="flex"
+          title="Your Income"
+          trans_type={dashboardData.income}
+        />
+        <CardTotalExpInc
+          className="flex"
+          title="Total Expense"
+          trans_type={dashboardData.expense}
+        />
       </div>
       <div className="container m-auto grid grid-cols-2 gap-6">
         <div className="h-[18rem]">

@@ -4,6 +4,7 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "../context/user-context";
 import { useRouter } from "next/navigation";
 import { Header } from "../components";
+import { DashboardProvider } from "../context/dashboard-context";
 
 const Layout = ({ children }) => {
   const { user, fetchUserData } = useContext(UserContext);
@@ -20,10 +21,10 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div>
+    <DashboardProvider>
       <Header user={user} logOut={logOut} />
       {children}
-    </div>
+    </DashboardProvider>
   );
 };
 

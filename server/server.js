@@ -22,6 +22,10 @@ app.use("/auth", authRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/categories", categoryRoutes);
 
+app.get("/", (_, res) => {
+  res.send("Welcome Expense Tracker API");
+});
+
 app.listen(PORT, () => {
   console.log(`server is running at localhost:${PORT}`);
 });

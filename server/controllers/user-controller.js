@@ -3,7 +3,6 @@ const sql = require("../config/db");
 const getAllUser = async (req, res) => {
   try {
     const data = await sql`SELECT * FROM users`;
-    console.log("DATA", data);
     res.status(200).json({ message: "successfully got data" });
   } catch (error) {
     res.status(404).json({ message: "couldn't read user" });
@@ -31,7 +30,7 @@ const updateUser = async (req, res) => {
     SET email = ${email}, name = ${name}, password = ${password}, profile_img= ${profile_img}
     WHERE id=${id}`
   );
-  console.log("DATA", data);
+
   res.status(200).json({ message: "new user created successful", user: data });
 };
 const deleteUser = async (req, res) => {
