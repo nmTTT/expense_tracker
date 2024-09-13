@@ -49,7 +49,7 @@ function DoughnutChart({ title }) {
         <p className="font-semibold">{title}</p>
       </div>
       <div className="border-gray-200 border"></div>
-      <div className="m-auto h-full w-fit flex justify-center bg-red-600">
+      <div className="m-auto h-full w-fit flex justify-center">
         <div className="w-fit flex justify-center">
           <Doughnut
             data={doughnutData}

@@ -6,11 +6,6 @@ const dashboardData = async (req, res) => {
   console.log("token", id);
 
   try {
-    const totalTransType = await sql`SELECT r.transaction_type, SUM(r.amount) 
-    FROM records r
-     INNER JOIN users u ON r.uid=u.id 
-    WHERE u.id=${id}
-    GROUP BY r.transaction_type`;
     const dayTrans =
       await sql`SELECT  DATE_TRUNC('day', r.created_at) w, r.transaction_type,
     SUM(r.amount)
@@ -70,12 +65,29 @@ FROM (
 ) sub;`;
 
     res.status(200).json({
-      totalTransType,
       dayTrans,
       weekCategoryTrans,
       latestFiveRecords,
       percentageRecords,
     });
+  } catch (error) {
+    console.log("error", error);
+    res.status(404).json({ message: "Couldn't read Dashboard data" });
+  }
+};
+
+const totalTransType = async (req, res) => {
+  console.log("first", req.user);
+  const { id } = req.user;
+  console.log("token", id);
+  try {
+    const totalTransType = await sql`
+    SELECT r.transaction_type, SUM(r.amount) 
+    FROM records r
+     INNER JOIN users u ON r.uid=u.id 
+    WHERE u.id='95961d25-71f2-412c-88f6-e43be99c18e2' AND r.transaction_type = 'EXP'
+    GROUP BY r.transaction_type`;
+    res.status(200).json({});
   } catch (error) {
     console.log("error", error);
     res.status(404).json({ message: "Couldn't read Dashboard data" });

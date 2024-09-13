@@ -31,10 +31,11 @@ const Dashboard = ({ fetchDashboardData }) => {
 
   return (
     <div className="container m-auto flex flex-col gap-6 items-center w-[100vw]">
-      <div className="flex gap-6 justify-center">
-        <div className="card image-full flex-1 h-full shadow-xl">
+      <div className="flex gap-6 h-[15rem] w-full">
+        <div className="card image-full shadow-xl flex-1">
           <figure>
             <img
+              className="w-full"
               src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
               alt="Shoes"
             />
@@ -52,8 +53,8 @@ const Dashboard = ({ fetchDashboardData }) => {
             </div>
           </div>
         </div>
-        <CardTotalExpInc className="flex-1" title="Your Income" />
-        <CardTotalExpInc className="flex-1" title="Total Expense" />
+        <CardTotalExpInc className="flex" title="Your Income" />
+        <CardTotalExpInc className="flex" title="Total Expense" />
       </div>
       <div className="container m-auto grid grid-cols-2 gap-6">
         <div className="h-[18rem]">
