@@ -17,15 +17,15 @@ import { DashboardContext } from "@/app/context/dashboard-context";
 
 Chart.register(CategoryScale, LinearScale, BarElement, ArcElement, Legend);
 
-const Dashboard = ({ fetchDashboardData }) => {
+const Dashboard = () => {
   const { user } = useContext(UserContext);
-  const { totalExp, totalInc } = useContext(DashboardContext);
+  const { totalExpInc, fetchDashboardData } = useContext(DashboardContext);
   useEffect(() => {
     if (user && user?.id) {
       fetchDashboardData();
     }
   }, [user?.id]);
-
+  console.log(totalExpInc);
   return (
     <div className="container m-auto flex flex-col gap-6 items-center w-[100vw]">
       <div className="flex gap-6 h-[15rem] w-full">
@@ -53,12 +53,12 @@ const Dashboard = ({ fetchDashboardData }) => {
         <CardTotalExpInc
           className="flex"
           title="Your Income"
-          total_trans={totalInc}
+          total_trans={totalExpInc?.total_income?.sum}
         />
         <CardTotalExpInc
           className="flex"
           title="Total Expense"
-          total_trans={totalExp}
+          total_trans={totalExpInc?.total_expense?.sum}
         />
       </div>
       <div className="container m-auto grid grid-cols-2 gap-6">

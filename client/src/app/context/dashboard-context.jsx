@@ -8,7 +8,7 @@ export const DashboardContext = createContext();
 
 export const DashboardProvider = ({ children }) => {
   const [totalInc, setTotalInc] = useState([]);
-  const [totalExp, setTotalExp] = useState([]);
+  const [totalExpInc, setTotalExpInc] = useState([]);
 
   const fetchDashboardData = async () => {
     try {
@@ -20,9 +20,8 @@ export const DashboardProvider = ({ children }) => {
       });
 
       if (response.status === 200) {
-        const { total_income, total_expense } = await response.json();
-        setTotalExp(total_expense.sum);
-        setTotalInc(total_income.sum);
+        console.log(response.data);
+        setTotalExpInc(response.data);
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -32,9 +31,7 @@ export const DashboardProvider = ({ children }) => {
     fetchDashboardData();
   }, []);
   return (
-    <DashboardContext.Provider
-      value={{ fetchDashboardData, totalExp, totalInc }}
-    >
+    <DashboardContext.Provider value={{ fetchDashboardData, totalExpInc }}>
       {children}
     </DashboardContext.Provider>
   );
