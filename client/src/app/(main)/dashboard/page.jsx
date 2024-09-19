@@ -5,6 +5,7 @@ import CardTotalExpInc from "./CardTotalExpInc";
 import { UserContext } from "@/app/context/user-context";
 import BarChartCard from "./BarChartCard";
 import DoughnutChart from "./DoughnutChart";
+import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import {
   ArcElement,
   BarElement,
@@ -26,6 +27,10 @@ const Dashboard = () => {
     }
   }, [user?.id]);
   console.log(totalExpInc);
+
+  const remainder =
+    totalExpInc?.total_income?.sum - totalExpInc?.total_expense?.sum;
+
   return (
     <div className="container m-auto flex flex-col gap-6 items-center w-[100vw]">
       <div className="flex gap-6 h-[15rem] w-full">
@@ -33,7 +38,7 @@ const Dashboard = () => {
           <figure>
             <img
               className="w-full"
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+              src="https://geology.com/world/world-map.gif"
               alt="Shoes"
             />
           </figure>
@@ -44,7 +49,7 @@ const Dashboard = () => {
             <div className="card-actions justify-between">
               <div className="flex flex-col gap-2">
                 <p>Cash</p>
-                <div>10'000'000</div>
+                <div>{remainder}</div>
               </div>
               <img src="./Logo.png" alt="wifi chip" />
             </div>
@@ -54,11 +59,15 @@ const Dashboard = () => {
           className="flex"
           title="Your Income"
           total_trans={totalExpInc?.total_income?.sum}
+          arrow={<FaArrowUp />}
+          arrowBg={"bg-green-600"}
         />
         <CardTotalExpInc
           className="flex"
           title="Total Expense"
           total_trans={totalExpInc?.total_expense?.sum}
+          arrow={<FaArrowDown />}
+          arrowBg={"bg-blue-600"}
         />
       </div>
       <div className="container m-auto grid grid-cols-2 gap-6">
